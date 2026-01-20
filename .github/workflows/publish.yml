@@ -40,4 +40,6 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           BUCKET_NAME: rapidlybuilt-production-www
         run: |
+          bin/tailwindcss build --target main
+          bin/tailwindcss build --target tools
           bundle exec baking_rack publish
