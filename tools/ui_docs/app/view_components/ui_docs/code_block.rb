@@ -1,4 +1,4 @@
-# Copied from RapidUI v0.1.1
+# Copied from RapidUI v0.1.3
 # Source: rapid_ui/docs/app/view_components/code_block.rb
 module UiDocs
   require "rouge"
@@ -46,14 +46,15 @@ module UiDocs
       def build_from_demo_helper(method, language: "ruby", **kwargs, &block)
         lines = extract_source!(*method.source_location, language:)
 
-        raise "first line not demo_components" unless lines[0].include?("demo_components do |c|")
-        lines.slice!(0)
+        if lines[0].include?("demo_components do |c|")
+          lines.slice!(0)
 
-        raise "last line not end" unless lines[-1].include?("end")
-        lines.pop
+          raise "last line not end" unless lines[-1].include?("end")
+          lines.pop
 
-        lines.each do |line|
-          line.sub!("c << ", "")
+          lines.each do |line|
+            line.sub!("c << ", "")
+          end
         end
 
         code = remove_indentation(lines)

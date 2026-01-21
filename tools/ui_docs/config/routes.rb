@@ -1,4 +1,4 @@
-# Copied from RapidUI v0.1.1
+# Copied from RapidUI v0.1.3
 # Source: rapid_ui/docs/config/routes.rb
 UiDocs::Engine.routes.draw do
   root to: "pages#index"
@@ -10,6 +10,18 @@ UiDocs::Engine.routes.draw do
   end
 
   resources :themes, only: %i[ index show ]
+
+  namespace :layouts, module: "ui_layouts" do
+    root to: "pages#index"
+
+    resource :application, controller: "application", only: [ :show ] do
+      get :head
+      get :header
+      get :subheader
+      get :sidebar
+      get :footer
+    end
+  end
 
   namespace :components do
     root to: "categories#index"

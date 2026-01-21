@@ -1,4 +1,4 @@
-# Copied from RapidUI v0.1.1
+# Copied from RapidUI v0.1.3
 # Source: rapid_ui/docs/app/helpers/demo_helper.rb
 module UiDocs
   module DemoHelper
@@ -16,7 +16,7 @@ module UiDocs
       ruby_code = CodeBlock.build_from_demo_helper(method(helper), factory: ui.factory) if helper
       html_code = CodeBlock.new(demo_format_html(html), language: "html", factory: ui.factory)
 
-      erb_code = nil unless erb_code.include?("<%")
+      erb_code = nil if erb_code && !erb_code.include?("<%")
 
       render ui.build(
         Demo,
@@ -28,10 +28,25 @@ module UiDocs
       )
     end
 
+    def new_demo_code_block(code = nil, language: nil, **kwargs, &block)
+      raise ArgumentError, "either code or block must be provided" if code.blank? && block.blank?
+
+      if block
+        code = capture(&block)
+        code = CodeBlock.remove_indentation(code)
+      end
+
+      CodeBlock.new(code, language:, **kwargs, factory: ui.factory)
+    end
+
+    def demo_code_block(code = nil, language: nil, **kwargs, &block)
+      render new_demo_code_block(code, language:, **kwargs, &block)
+    end
+
     def demo_components(&block)
       demo_components = []
       block.call(demo_components)
-      safe_join(demo_components.map { |c| render(c) })
+      safe_join(demo_components.map { |c| c.is_a?(String) ? c : render(c) })
     end
 
     def demo_check_html(helper, erb_html, helper_html)

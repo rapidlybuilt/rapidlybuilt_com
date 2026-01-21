@@ -1,4 +1,4 @@
-# Copied from RapidUI v0.1.1
+# Copied from RapidUI v0.1.3
 # Source: rapid_ui/docs/app/services/parse_theme.rb
 module UiDocs
   class ParseTheme < ApplicationService::Brief

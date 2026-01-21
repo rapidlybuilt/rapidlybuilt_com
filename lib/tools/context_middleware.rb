@@ -23,7 +23,7 @@ module Tools
       end
 
       layout.build_head do |head|
-        head.site_name = "Docs"
+        head.site_name = "Rapidly Built"
         head.charset = "utf-8"
 
         head.build_favicon("rapid_ui/favicon-32x32.png", type: "image/png", size: 32)

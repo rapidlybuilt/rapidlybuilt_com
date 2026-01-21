@@ -1,4 +1,4 @@
-# Copied from RapidUI v0.1.1
+# Copied from RapidUI v0.1.3
 # Source: rapid_ui/docs/app/helpers/application_helper.rb
 module UiDocs
   module ApplicationHelper

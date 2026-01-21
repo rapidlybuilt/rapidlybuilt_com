@@ -15,7 +15,7 @@
 
     <link rel="icon" href="<%= asset_path('logo-32x32.png') %>" sizes="32x32" type="image/png">
     <link rel="apple-touch-icon" href="<%= asset_path('logo-250x250.png') %>" sizes="250x250">
-    <%= open_graph.tags self if open_graph? %>
+    <%= render open_graph if open_graph? %>
 
     <%= stylesheet_link_tag :application, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>

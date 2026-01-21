@@ -153,12 +153,12 @@ class Upgrade
     content = File.read(source, encoding: "UTF-8")
 
     # Apply file-specific transformations
-    case File.basename(source)
-    when "application_controller.rb"
+    case source.sub("#{RAPID_UI_DOCS}/", "")
+    when "app/controllers/application_controller.rb"
       content = transform_application_controller(content)
-    when "application_helper.rb"
+    when "app/helpers/application_helper.rb"
       content = transform_application_helper(content)
-    when "theme.rb"
+    when "app/models/theme.rb"
       content = transform_theme_model(content)
     end
 
