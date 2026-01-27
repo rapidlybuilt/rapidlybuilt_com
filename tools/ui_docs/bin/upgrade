@@ -234,6 +234,7 @@ class Upgrade
 
     # Transform Rails.application.routes to UiDocs::Engine.routes
     content.gsub!("Rails.application.routes.draw", "UiDocs::Engine.routes.draw")
+    content.gsub!("get \"search\"", "# get \"search\"")
     File.write(target, file_header(source, comment_style: :ruby) + content)
   end
 

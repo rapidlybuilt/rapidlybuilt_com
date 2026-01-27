@@ -7,7 +7,7 @@ class Tools::SearchesController < Tools::BaseController
         render json: rapidly_built.toolkit.search.static.as_json
       end
 
-      format.html do
+      format.any do
         ui.layout.subheader.css_class = "hidden"
         ui.layout.sidebars.first.css_class = "hidden" if ui.layout.sidebars.first.present?
 
